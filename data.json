@@ -1,18 +1,10 @@
 {
   "goals": [
     {
-      "id": 1783258672713,
-      "title": "每周总结本周学习的开发技能",
-      "deadline": "2026-07-12",
-      "completed": false,
-      "createdAt": "2026-07-05T13:37:52.713Z"
-    },
-    {
-      "id": 1783258640445,
-      "title": "每天学习一小时开发技能",
-      "deadline": "2026-07-06",
-      "completed": false,
-      "createdAt": "2026-07-05T13:37:20.445Z"
+      "id": 1783267059020,
+      "text": "每天学习开发技能",
+      "date": "2026-07-06",
+      "completed": false
     }
   ],
   "learning": [],

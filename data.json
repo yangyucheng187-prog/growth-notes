@@ -5,9 +5,23 @@
       "text": "每天学习开发技能",
       "date": "2026-07-06",
       "completed": false
+    },
+    {
+      "id": 1783268414755,
+      "text": "每周总结当周学习内容",
+      "date": "2026-07-12",
+      "completed": false
     }
   ],
-  "learning": [],
+  "learning": [
+    {
+      "id": 1783268472476,
+      "title": "vue的组件间通信方式",
+      "category": "Vue",
+      "content": "vue的组件间通信方式",
+      "time": "2026/7/6 00:21:12"
+    }
+  ],
   "communication": [],
   "summary": []
 }

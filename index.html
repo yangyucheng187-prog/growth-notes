@@ -6,66 +6,117 @@
     <title>成长笔记</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .btn-gradient-blue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .btn-gradient-blue:hover {
+            background: linear-gradient(135deg, #5a6fd6 0%, #6a4192 100%);
+        }
+        .btn-gradient-green {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        .btn-gradient-green:hover {
+            background: linear-gradient(135deg, #0f8a7d 0%, #2fd46d 100%);
+        }
+        .btn-gradient-orange {
+            background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+        }
+        .btn-gradient-orange:hover {
+            background: linear-gradient(135deg, #e64317 0%, #e6a72e 100%);
+        }
+        .btn-gradient-purple {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+        }
+        .btn-gradient-purple:hover {
+            background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        input:focus, textarea:focus, select:focus {
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
+<body>
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
         <header class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">📝 成长笔记</h1>
-            <p class="text-gray-600">记录学习，见证成长</p>
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/80 shadow-lg mb-4">
+                <i class="fa-solid fa-book-open text-3xl text-purple-600"></i>
+            </div>
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-purple-700 to-indigo-600 bg-clip-text text-transparent mb-2">成长笔记</h1>
+            <p class="text-gray-600 text-lg">记录每一天的学习与成长</p>
         </header>
 
         <div class="flex flex-wrap justify-center gap-3 mb-6">
-            <button onclick="exportData()" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">导出数据</button>
-            <label class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition-colors cursor-pointer">
+            <button onclick="exportData()" class="btn-gradient-blue text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-lg transition-all">导出数据</button>
+            <label class="btn-gradient-green text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-lg transition-all cursor-pointer">
                 导入数据
                 <input type="file" id="import-file" accept=".json" onchange="importData()" class="hidden">
             </label>
-            <button onclick="clearAllData()" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 transition-colors">清空数据</button>
-            <button onclick="toggleGithubSettings()" class="bg-gray-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-700 transition-colors">GitHub 同步</button>
-            <button onclick="syncToGithub()" id="btn-sync-github" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors" style="display:none">同步到 GitHub</button>
-            <button onclick="fetchFromGithub()" id="btn-fetch-github" class="bg-teal-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-teal-700 transition-colors" style="display:none">从 GitHub 获取</button>
+            <button onclick="clearAllData()" class="bg-red-500 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-red-600 transition-colors">清空数据</button>
+            <button onclick="toggleGithubSettings()" class="bg-gray-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors">GitHub 同步</button>
+            <button onclick="syncToGithub()" id="btn-sync-github" class="btn-gradient-purple text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-lg transition-all" style="display:none">同步到 GitHub</button>
+            <button onclick="fetchFromGithub()" id="btn-fetch-github" class="bg-teal-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-teal-700 transition-colors" style="display:none">从 GitHub 获取</button>
         </div>
 
-        <div id="github-settings" class="hidden bg-gray-50 rounded-xl p-4 mb-6 border border-gray-200">
-            <h3 class="font-medium text-gray-800 mb-3">GitHub 配置</h3>
+        <div id="github-settings" class="hidden glass-card rounded-2xl p-6 mb-6">
+            <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                <i class="fa-brands fa-github text-gray-700"></i> GitHub 配置
+            </h3>
             <div class="flex flex-wrap gap-4">
-                <input type="text" id="github-username" placeholder="GitHub 用户名" class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                <input type="text" id="github-repo" placeholder="仓库名称" class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                <input type="password" id="github-token" placeholder="Personal Access Token" class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                <button onclick="saveGithubConfig()" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition-colors">保存配置</button>
+                <input type="text" id="github-username" placeholder="GitHub 用户名" class="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none w-48">
+                <input type="text" id="github-repo" placeholder="仓库名称" class="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none w-48">
+                <input type="password" id="github-token" placeholder="Personal Access Token" class="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none w-64">
+                <button onclick="saveGithubConfig()" class="btn-gradient-purple text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-lg transition-all">保存配置</button>
             </div>
             <div class="flex flex-wrap gap-4 mt-3">
-                <button onclick="exportConfigLink()" class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-600 transition-colors">导出配置链接</button>
-                <button onclick="importConfigFromUrl()" class="bg-cyan-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-cyan-600 transition-colors">从链接导入配置</button>
+                <button onclick="exportConfigLink()" class="btn-gradient-orange text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-lg transition-all">导出配置链接</button>
+                <button onclick="importConfigFromUrl()" class="bg-cyan-500 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-cyan-600 transition-colors">从链接导入配置</button>
             </div>
-            <p class="text-xs text-gray-500 mt-3">说明：需要创建一个 GitHub 仓库，并生成一个带有 repo 权限的 Personal Access Token</p>
+            <p class="text-xs text-gray-500 mt-4">说明：需要创建一个 GitHub 仓库，并生成一个带有 repo 权限的 Personal Access Token</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-white rounded-xl p-4 shadow-md">
-                <div class="flex items-center gap-2 mb-4">
-                    <i class="fa-solid fa-target text-blue-500"></i>
-                    <h2 class="text-lg font-medium">学习目标</h2>
-                    <span id="goal-count" class="ml-auto text-sm text-gray-500">0 个目标</span>
+            <div class="glass-card rounded-2xl p-6 shadow-lg card-hover transition-all">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
+                        <i class="fa-solid fa-target text-white"></i>
+                    </div>
+                    <h2 class="text-lg font-semibold text-gray-800">学习目标</h2>
+                    <span id="goal-count" class="ml-auto text-sm text-gray-500 font-medium">0/0 已完成</span>
                 </div>
                 <div class="mb-4">
-                    <input type="text" id="goal-input" placeholder="输入学习目标..." class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                    <div class="flex gap-2 mt-2">
-                        <input type="date" id="goal-date" class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                        <button onclick="addGoal()" class="flex-1 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors">添加</button>
+                    <input type="text" id="goal-input" placeholder="输入学习目标..." class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none">
+                    <div class="flex gap-2 mt-3">
+                        <input type="date" id="goal-date" class="px-4 py-3 border border-gray-200 rounded-xl focus:outline-none">
+                        <button onclick="addGoal()" class="flex-1 btn-gradient-blue text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all">添加</button>
                     </div>
                 </div>
-                <div id="goal-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+                <div id="goal-list" class="space-y-3 max-h-64 overflow-y-auto"></div>
             </div>
 
-            <div class="bg-white rounded-xl p-4 shadow-md">
-                <div class="flex items-center gap-2 mb-4">
-                    <i class="fa-solid fa-book-open text-green-500"></i>
-                    <h2 class="text-lg font-medium">学习笔记</h2>
+            <div class="glass-card rounded-2xl p-6 shadow-lg card-hover transition-all">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <i class="fa-solid fa-book-open text-white"></i>
+                    </div>
+                    <h2 class="text-lg font-semibold text-gray-800">学习笔记</h2>
                 </div>
                 <div class="mb-4">
-                    <input type="text" id="learning-title" placeholder="学习主题..." class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-2">
-                    <select id="learning-category" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-2">
+                    <input type="text" id="learning-title" placeholder="学习主题..." class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none mb-3">
+                    <select id="learning-category" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none mb-3">
                         <option value="PHP">PHP</option>
                         <option value="Go">Go</option>
                         <option value="Vue">Vue</option>
@@ -73,70 +124,76 @@
                         <option value="AI">AI</option>
                         <option value="其他">其他</option>
                     </select>
-                    <textarea id="learning-content" placeholder="详细笔记内容..." rows="3" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
-                    <button onclick="addLearning()" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors mt-2">添加笔记</button>
+                    <textarea id="learning-content" placeholder="详细笔记内容..." rows="3" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none"></textarea>
+                    <button onclick="addLearning()" class="w-full btn-gradient-green text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all mt-3">添加笔记</button>
                 </div>
-                <div id="learning-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+                <div id="learning-list" class="space-y-3 max-h-64 overflow-y-auto"></div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-white rounded-xl p-4 shadow-md">
-                <div class="flex items-center gap-2 mb-4">
-                    <i class="fa-solid fa-comments text-orange-500"></i>
-                    <h2 class="text-lg font-medium">沟通记录</h2>
+            <div class="glass-card rounded-2xl p-6 shadow-lg card-hover transition-all">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center">
+                        <i class="fa-solid fa-comments text-white"></i>
+                    </div>
+                    <h2 class="text-lg font-semibold text-gray-800">沟通记录</h2>
                 </div>
                 <div class="mb-4">
-                    <input type="text" id="comm-person" placeholder="沟通对象..." class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-2">
-                    <select id="comm-type" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-2">
+                    <input type="text" id="comm-person" placeholder="沟通对象..." class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none mb-3">
+                    <select id="comm-type" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none mb-3">
                         <option value="需求讨论">需求讨论</option>
                         <option value="技术交流">技术交流</option>
                         <option value="问题请教">问题请教</option>
                         <option value="工作汇报">工作汇报</option>
                     </select>
-                    <textarea id="comm-content" placeholder="沟通内容及收获..." rows="3" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
-                    <button onclick="addCommunication()" class="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition-colors mt-2">添加记录</button>
+                    <textarea id="comm-content" placeholder="沟通内容及收获..." rows="3" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none"></textarea>
+                    <button onclick="addCommunication()" class="w-full btn-gradient-orange text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all mt-3">添加记录</button>
                 </div>
-                <div id="comm-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+                <div id="comm-list" class="space-y-3 max-h-64 overflow-y-auto"></div>
             </div>
 
-            <div class="bg-white rounded-xl p-4 shadow-md">
-                <div class="flex items-center gap-2 mb-4">
-                    <i class="fa-solid fa-reflection text-purple-500"></i>
-                    <h2 class="text-lg font-medium">总结反思</h2>
+            <div class="glass-card rounded-2xl p-6 shadow-lg card-hover transition-all">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                        <i class="fa-solid fa-reflection text-white"></i>
+                    </div>
+                    <h2 class="text-lg font-semibold text-gray-800">总结反思</h2>
                 </div>
                 <div class="mb-4">
-                    <select id="summary-type" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-2">
+                    <select id="summary-type" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none mb-3">
                         <option value="每日总结">每日总结</option>
                         <option value="每周总结">每周总结</option>
                         <option value="每月总结">每月总结</option>
                         <option value="专题总结">专题总结</option>
                     </select>
-                    <textarea id="summary-content" placeholder="总结内容..." rows="4" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
-                    <button onclick="addSummary()" class="w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600 transition-colors mt-2">添加总结</button>
+                    <textarea id="summary-content" placeholder="总结内容..." rows="4" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none"></textarea>
+                    <button onclick="addSummary()" class="w-full btn-gradient-purple text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all mt-3">添加总结</button>
                 </div>
-                <div id="summary-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+                <div id="summary-list" class="space-y-3 max-h-64 overflow-y-auto"></div>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl p-4 shadow-md">
-            <h2 class="text-lg font-medium mb-4">📊 统计面板</h2>
+        <div class="glass-card rounded-2xl p-6 shadow-lg">
+            <h2 class="text-lg font-semibold text-gray-800 mb-5 flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-purple-600"></i> 统计面板
+            </h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="text-center p-4 bg-blue-50 rounded-lg">
-                    <div class="text-2xl font-bold text-blue-600" id="stat-goals">0</div>
-                    <div class="text-sm text-gray-600">学习目标</div>
+                <div class="text-center p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl">
+                    <div class="text-3xl font-bold text-blue-600" id="stat-goals">0</div>
+                    <div class="text-sm text-gray-600 mt-1">学习目标</div>
                 </div>
-                <div class="text-center p-4 bg-green-50 rounded-lg">
-                    <div class="text-2xl font-bold text-green-600" id="stat-learning">0</div>
-                    <div class="text-sm text-gray-600">学习笔记</div>
+                <div class="text-center p-5 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl">
+                    <div class="text-3xl font-bold text-green-600" id="stat-learning">0</div>
+                    <div class="text-sm text-gray-600 mt-1">学习笔记</div>
                 </div>
-                <div class="text-center p-4 bg-orange-50 rounded-lg">
-                    <div class="text-2xl font-bold text-orange-600" id="stat-comm">0</div>
-                    <div class="text-sm text-gray-600">沟通记录</div>
+                <div class="text-center p-5 bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl">
+                    <div class="text-3xl font-bold text-orange-600" id="stat-comm">0</div>
+                    <div class="text-sm text-gray-600 mt-1">沟通记录</div>
                 </div>
-                <div class="text-center p-4 bg-purple-50 rounded-lg">
-                    <div class="text-2xl font-bold text-purple-600" id="stat-summary">0</div>
-                    <div class="text-sm text-gray-600">总结反思</div>
+                <div class="text-center p-5 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl">
+                    <div class="text-3xl font-bold text-purple-600" id="stat-summary">0</div>
+                    <div class="text-sm text-gray-600 mt-1">总结反思</div>
                 </div>
             </div>
         </div>

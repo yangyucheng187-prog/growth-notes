@@ -5,6 +5,12 @@
       "text": "第一周：学习vue3相关开发知识",
       "date": "2026-07-11",
       "completed": true
+    },
+    {
+      "id": 1783864018827,
+      "text": "第二周：继续学习vue3和elementplus相关开发知识",
+      "date": "2026-07-18",
+      "completed": false
     }
   ],
   "learning": [

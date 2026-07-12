@@ -2,7 +2,7 @@
   "goals": [
     {
       "id": 1783268472477,
-      "text": "第一周：学习vue相关开发知识",
+      "text": "第一周：学习vue3相关开发知识",
       "date": "2026-07-11",
       "completed": true
     }
@@ -10,37 +10,37 @@
   "learning": [
     {
       "id": 1783268472476,
-      "title": "Vue3响应式原理深度解析",
+      "title": "Vue3官方文档学习 - 模板语法与响应式基础",
       "category": "Vue",
-      "content": "深入研究了Vue3的响应式系统。Vue3使用Proxy代替Vue2的Object.defineProperty，核心差异在于：1. Proxy可以直接监听对象和数组的变化，不需要遍历；2. 支持监听新增和删除属性；3. 性能更好，因为只有访问时才会触发依赖收集。重点分析了reactive函数的实现：通过createReactiveObject创建响应式对象，使用WeakMap存储target→proxy的映射，避免重复创建。effect函数是副作用的核心，通过track收集依赖，trigger触发更新。还发现了一个关键细节：ref对于基本类型会创建一个{value: xxx}的包装对象，而reactive直接返回Proxy。",
+      "content": "今天学习了Vue3官方文档的基础章节。模板语法部分：插值表达式{{ }}支持JavaScript表达式，如{{ message.split('').reverse().join('') }}；v-bind用于动态绑定属性，简写为:attr；v-on用于事件绑定，简写为@event。响应式基础部分：ref用于创建基本类型响应式数据，需要通过.value访问；reactive用于创建对象类型响应式数据，直接访问属性。计算属性computed会根据依赖自动缓存，只有依赖变化时才重新计算，比methods更高效。类与样式绑定：v-bind:class支持对象语法、数组语法和三元表达式；v-bind:style同样支持对象和数组语法。条件渲染：v-if用于条件性渲染元素，v-show只是切换display属性，v-if有更高的切换开销但初始渲染开销更低。列表渲染：v-for=\"(item, index) in items\"，:key必须提供且不能使用index，推荐使用唯一ID。",
       "time": "2026/7/6 20:30:00"
     },
     {
       "id": 1783268472478,
-      "title": "Vue3虚拟DOM与Diff算法优化",
+      "title": "Vue3官方文档学习 - 事件处理与表单绑定",
       "category": "Vue",
-      "content": "分析了Vue3的虚拟DOM实现和Diff算法。Vue3对虚拟DOM做了重大优化：1. PatchFlags标记：在编译阶段为每个VNode添加标记，如PROPS、TEXT、FULL_PROPS等，Diff时只比较有标记的部分；2. 静态提升：将静态节点提升到渲染函数外部，避免每次渲染都创建新的VNode；3. Fragment支持：允许组件返回多个根节点。Diff算法采用双端比较策略，同时利用最长递增子序列优化移动操作。对比Vue2，Vue3的Diff复杂度从O(n)优化到了O(n log n)，在大型列表渲染时性能提升明显。",
+      "content": "今天继续学习事件处理、表单绑定、侦听器和模板引用。事件处理：v-on支持内联语句和方法调用，事件对象通过$event传递；事件修饰符包括.stop阻止冒泡、.prevent阻止默认行为、.capture捕获模式、.self只处理自身触发的事件、.once只触发一次；按键修饰符如.enter、.tab等。表单输入绑定：v-model是v-bind和v-on的语法糖，不同表单元素有不同的绑定方式——文本框绑定value，复选框绑定checked，单选框绑定value，select绑定value。修饰符：.lazy在change事件后同步，.number自动转换为数字，.trim自动去除首尾空格。侦听器watch：可以监听ref、reactive对象或计算属性，支持深度监听deep:true，支持立即执行immediate:true，还可以监听多个源。模板引用ref：通过ref=\"domRef\"获取DOM元素，在onMounted中访问，用于获取焦点、测量尺寸等操作。",
       "time": "2026/7/7 20:30:00"
     },
     {
       "id": 1783268472479,
-      "title": "Vue3编译优化技术详解",
+      "title": "Vue3官方文档学习 - 组件基础与生命周期",
       "category": "Vue",
-      "content": "深入学习了Vue3编译器的优化策略。核心优化点：1. 静态提升：hoistStatic将静态节点和静态属性提升到render函数外，用常量存储；2. 预字符串化：将连续的静态节点合并为字符串，减少VNode创建开销；3. PatchFlags生成：根据节点类型和属性变化情况生成对应的标记；4. 缓存事件处理：cacheHandlers对事件处理器进行缓存，避免每次渲染都重新创建函数。还研究了编译器的架构：template→ast→transform→generate，其中transform阶段是优化的关键，会对AST进行遍历和转换。",
+      "content": "今天学习组件基础、生命周期、Props和事件。组件基础：使用defineComponent或<script setup>定义组件，模板中使用kebab-case标签；组件可以嵌套，支持递归组件（需要name选项）。生命周期钩子：onBeforeMount在挂载前调用，onMounted在挂载后调用（可以访问DOM），onBeforeUpdate在更新前调用，onUpdated在更新后调用，onBeforeUnmount在卸载前调用（清理副作用），onUnmounted在卸载后调用。Props：父组件通过props向子组件传递数据，子组件通过defineProps声明；props支持类型验证、必填验证、默认值和自定义验证函数；props是只读的，子组件不应直接修改。事件：子组件通过defineEmits声明可触发的事件，使用emit('eventName', data)触发；父组件通过@eventName监听；支持事件参数和自定义事件。",
       "time": "2026/7/8 20:30:00"
     },
     {
       "id": 1783268472480,
-      "title": "Vue3组合式API设计模式与最佳实践",
+      "title": "Vue3官方文档学习 - 组件v-model与插槽",
       "category": "Vue",
-      "content": "总结了组合式API的设计模式。核心模式：1. 逻辑复用：使用composables封装可复用逻辑，如useFetch、useDebounce；2. 状态管理：配合Pinia实现全局状态管理，通过storeToRefs解构响应式数据；3. 生命周期：onMounted、onUnmounted等钩子在setup中使用，注意onBeforeMount和onMounted的执行时机；4. 依赖注入：provide/inject实现跨层级通信，适合库和组件库开发；5. 异步处理：配合async/await处理异步数据，使用watchEffect监听响应式依赖。实践中发现，合理使用ref和reactive的组合可以避免不必要的响应式开销。",
+      "content": "今天学习组件v-model、透传Attributes和插槽。组件v-model：默认使用modelValue作为prop和update:modelValue作为事件；支持自定义v-model名称，如v-model:title；一个组件可以有多个v-model绑定。透传Attributes：当组件没有声明对应的prop时，父组件传递的属性会自动透传到根元素；使用inheritAttrs: false可以禁用自动透传；通过$attrs访问透传的属性；常用于创建高阶组件。插槽Slots：默认插槽通过<slot>渲染父组件的内容；具名插槽通过name属性区分，使用<template #name>或<template v-slot:name>；作用域插槽允许子组件向父组件传递数据，通过<slot :data=\"value\">和<template #default=\"slotProps\">接收；插槽可以设置默认内容。",
       "time": "2026/7/9 20:30:00"
     },
     {
       "id": 1783268472481,
-      "title": "Vue3性能优化与工程化实践",
+      "title": "Vue3官方文档学习 - 依赖注入与异步组件",
       "category": "Vue",
-      "content": "研究了Vue3项目的性能优化策略。关键优化点：1. 懒加载路由：使用() => import()动态导入组件，配合webpack的splitChunks优化打包；2. 组件懒加载：对大型组件使用defineAsyncComponent异步加载；3. 响应式数据优化：使用shallowRef和shallowReactive避免深层响应式；4. 虚拟滚动：使用vue-virtual-scroller处理大数据量列表；5. KeepAlive缓存：缓存频繁切换的组件，减少重复渲染；6. 优化打包：使用Vite的build配置，配合tree-shaking和code splitting。还学习了使用Vue DevTools的Performance面板分析性能瓶颈。",
+      "content": "今天学习依赖注入和异步组件。依赖注入：provide/inject用于跨层级组件通信，祖先组件通过provide(key, value)提供数据，后代组件通过inject(key, defaultValue)获取；provide可以是响应式的，后代组件会自动响应变化；常用于主题配置、国际化等场景。异步组件：使用defineAsyncComponent(() => import('./Component.vue'))创建异步组件；支持加载状态、错误状态和超时设置；配合Suspense组件使用，<Suspense>包含#default和#fallback插槽；路由懒加载就是利用异步组件实现的。额外学习了组合式函数的最佳实践：函数名以use开头，返回响应式状态时使用ref而非reactive，保持函数纯粹无副作用，提供明确的返回类型。",
       "time": "2026/7/10 20:30:00"
     }
   ],
@@ -49,7 +49,7 @@
     {
       "id": 1783268472483,
       "type": "每周总结",
-      "content": "第一周学习总结：本周深入学习了Vue3的核心原理和高级特性，包括响应式系统、虚拟DOM、编译优化、组合式API和性能优化。通过源码层面的分析，对Vue3的设计理念有了更深的理解。下周计划学习TypeScript在Vue项目中的应用，以及深入研究Element Plus组件库的源码实现。",
+      "content": "第一周学习总结：本周系统学习了Vue3官方文档的核心章节，包括模板语法、响应式基础、计算属性、事件处理、表单绑定、组件基础、生命周期、Props、事件、组件v-model、插槽、依赖注入和异步组件。通过官方文档的学习，对Vue3的设计理念和最佳实践有了更深入的理解。下周计划继续学习Vue Router、Pinia状态管理和TypeScript集成。",
       "time": "2026/7/10 21:00:00"
     }
   ]

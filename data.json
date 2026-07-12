@@ -1,14 +1,63 @@
 {
-  "goals": [],
+  "goals": [
+    {
+      "id": 1783268472477,
+      "text": "第一周：学习vue相关开发知识",
+      "date": "2026-07-11",
+      "completed": true
+    }
+  ],
   "learning": [
     {
       "id": 1783268472476,
-      "title": "vue的组件间通信方式",
+      "title": "Vue3项目结构与组件基础",
       "category": "Vue",
-      "content": "vue的组件间通信方式",
-      "time": "2026/7/6 00:21:12"
+      "content": "今天开始学习Vue3，首先了解了项目的基本结构：src目录下包含components、views、router、store等文件夹。组件是Vue的核心，每个.vue文件包含template、script和style三个部分。template用于写HTML结构，script用于写JavaScript逻辑，style用于样式。还学习了如何注册和使用组件，包括全局注册和局部注册两种方式。",
+      "time": "2026/7/6 09:30:00"
+    },
+    {
+      "id": 1783268472478,
+      "title": "Vue3响应式原理与组合式API",
+      "category": "Vue",
+      "content": "学习了Vue3的响应式原理，了解到Vue3使用Proxy替代Vue2的Object.defineProperty来实现响应式，性能更好。重点学习了组合式API：ref用于创建基本类型的响应式数据，reactive用于创建对象类型的响应式数据。还学习了computed计算属性、watch侦听器和watchEffect的用法。setup函数是组合式API的入口，所有的组合式API都在setup中使用。",
+      "time": "2026/7/7 10:00:00"
+    },
+    {
+      "id": 1783268472479,
+      "title": "Vue3模板语法与指令",
+      "category": "Vue",
+      "content": "深入学习了Vue3的模板语法，包括插值表达式{{ }}、v-bind绑定属性、v-model双向数据绑定、v-if/v-else条件渲染、v-for列表渲染等常用指令。重点练习了v-for的用法，包括遍历数组和对象，以及如何使用:key来提高渲染效率。还学习了事件处理v-on指令，包括事件修饰符如.stop、.prevent、.once等。",
+      "time": "2026/7/8 09:00:00"
+    },
+    {
+      "id": 1783268472480,
+      "title": "Vue3组件间通信方式",
+      "category": "Vue",
+      "content": "学习了Vue3组件间通信的几种方式：1. 父子组件通信：父组件通过props向子组件传递数据，子组件通过emit触发事件向父组件传递数据；2. 子组件访问父组件：使用$parent；3. 父组件访问子组件：使用ref；4. 兄弟组件通信：可以通过共同的父组件作为中介；5. 跨层级组件通信：使用provide和inject。还学习了使用EventBus进行组件通信的方式。",
+      "time": "2026/7/9 14:00:00"
+    },
+    {
+      "id": 1783268472481,
+      "title": "Vue3路由与状态管理",
+      "category": "Vue",
+      "content": "学习了Vue Router的基本用法，包括路由的配置、动态路由、嵌套路由、路由守卫等。重点学习了导航守卫beforeEach，用于实现页面访问控制。还学习了Pinia状态管理，了解了如何创建store、定义state、actions和getters。实践了在组件中使用store的方式，通过defineStore定义store，然后在组件中使用useStore来访问。",
+      "time": "2026/7/10 11:00:00"
+    },
+    {
+      "id": 1783268472482,
+      "title": "Element Plus组件库使用",
+      "category": "Vue",
+      "content": "学习了Element Plus组件库的使用，包括如何安装和引入。重点学习了常用组件：Button、Input、Form、Table、Dialog、Message等。实践了Form表单的验证功能，包括自定义验证规则。还学习了Table组件的用法，包括列定义、数据绑定、分页等功能。Element Plus提供了丰富的组件，可以大大提高开发效率。",
+      "time": "2026/7/10 15:30:00"
     }
   ],
   "communication": [],
-  "summary": []
+  "summary": [
+    {
+      "id": 1783268472483,
+      "type": "每周总结",
+      "content": "第一周学习总结：本周系统学习了Vue3的基础知识，包括项目结构、响应式原理、组合式API、模板语法、组件间通信、路由和状态管理等。通过学习，对Vue3有了全面的了解，能够独立创建简单的Vue3项目。下周计划继续深入学习Vue3的高级特性，并开始学习TypeScript在Vue项目中的应用。",
+      "time": "2026/7/10 18:00:00"
+    }
+  ]
 }

@@ -48,6 +48,13 @@
       "category": "Vue",
       "content": "今天学习依赖注入和异步组件。依赖注入：provide/inject用于跨层级组件通信，祖先组件通过provide(key, value)提供数据，后代组件通过inject(key, defaultValue)获取；provide可以是响应式的，后代组件会自动响应变化；常用于主题配置、国际化等场景。异步组件：使用defineAsyncComponent(() => import('./Component.vue'))创建异步组件；支持加载状态、错误状态和超时设置；配合Suspense组件使用，<Suspense>包含#default和#fallback插槽；路由懒加载就是利用异步组件实现的。额外学习了组合式函数的最佳实践：函数名以use开头，返回响应式状态时使用ref而非reactive，保持函数纯粹无副作用，提供明确的返回类型。",
       "time": "2026/7/10 20:30:00"
+    },
+    {
+      "id": 1783864494591,
+      "title": "测试",
+      "category": "PHP",
+      "content": "测试",
+      "time": "2026/7/12 21:54:54"
     }
   ],
   "communication": [],

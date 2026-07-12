@@ -676,14 +676,26 @@
             }
         }
 
+        async function loadInitialData() {
+            try {
+                const response = await fetch('data.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    saveData(data);
+                }
+            } catch (e) {
+                console.log('No data.json found, using localStorage data');
+            }
+            renderGoals();
+            renderLearning();
+            renderCommunication();
+            renderSummary();
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             importConfigFromUrl();
+            loadInitialData();
         });
-
-        renderGoals();
-        renderLearning();
-        renderCommunication();
-        renderSummary();
     </script>
 </body>
 </html>
